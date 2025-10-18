@@ -7,7 +7,7 @@ import '../../public/assets/css/animate.min.css'
 import '../../public/assets/css/aos.min.css'
 import '../../public/assets/css/icofont.min.css'
 import '../../public/assets/css/magnific-popup.css'
-import '../../public/assets/css/slick.css'
+// import '../../public/assets/css/slick.css'
 import '../../public/assets/css/swiper-bundle.min.css'
 import '../../public/css/app.css'
 

@@ -111,7 +111,7 @@ const HeroBanner = () => {
         ))}
       </Swiper>
 
-      {/* Thumbnail Slider */}
+      {/* Thumbnail Slider
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
@@ -137,7 +137,7 @@ const HeroBanner = () => {
             />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
 
       {/* Navigation Controls */}
       {/* <div className="slider__controls__wrap slider__controls__pagination slider__controls__arrows">

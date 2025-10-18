@@ -9,7 +9,7 @@ import TopBar from './TopBar';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(true);
   const pathname = usePathname();
 
   // Close mobile menu when route changes
@@ -205,24 +205,38 @@ const Header = () => {
             <div className="mobile-navigation">
               <nav>
                 <ul className="mobile-menu">
-                  {navItems.map((item) => (
+                  {navItems.map((item, index) => (
                     <li
                       key={`mobile-${item.name}`}
                       className={item.submenu ? 'menu-item-has-children' : ''}
                     >
                       {item.submenu ? (
                         <>
-                          <a onClick={(e) => {
-                            e.preventDefault();
-                            const submenu = e.currentTarget.nextElementSibling as HTMLElement;
-                            if (submenu) {
-                              submenu.style.display =
-                                submenu.style.display === 'block' ? 'none' : 'block';
-                            }
-                          }}>
+                          <a
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const allDropdowns = document.querySelectorAll<HTMLUListElement>('.mobile-menu .dropdown');
+
+                              // Close all other dropdowns
+                              allDropdowns.forEach((dropdown) => {
+                                if (dropdown !== e.currentTarget.nextElementSibling) {
+                                  dropdown.style.display = 'none';
+                                }
+                              });
+
+                              // Toggle only this dropdown
+                              const submenu = e.currentTarget.nextElementSibling as HTMLElement | null;
+                              if (submenu) {
+                                submenu.style.display =
+                                  submenu.style.display === 'block' ? 'none' : 'block';
+                              }
+                            }}
+                          >
                             {item.name} <i className="icofont-thin-down"></i>
                           </a>
-                          <ul className="dropdown">
+
+                          <ul className="dropdown" style={{ display: 'none' }}>
                             {item.submenu.map((subItem) => (
                               <li key={subItem.name}>
                                 {subItem.external ? (
@@ -230,6 +244,7 @@ const Header = () => {
                                     href={subItem.path}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    download={subItem.download}
                                   >
                                     {subItem.name}
                                   </a>
@@ -246,6 +261,7 @@ const Header = () => {
                     </li>
                   ))}
                 </ul>
+
               </nav>
             </div>
 
